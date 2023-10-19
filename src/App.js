@@ -46,7 +46,7 @@ function Board () {
 
     const nextsquare=squares.slice();
     //the logic to not let change value ones the value is changed to either x or O
-    if (nextsquare[i]){
+    if (Winner(squares) || nextsquare[i]){
       return ;
     }
     // the move foris for which  player 
