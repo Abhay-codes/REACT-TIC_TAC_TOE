@@ -15,10 +15,25 @@ function Square({val,onSquareClick}){
 }
 function Board () {
   const [squares,setsquare]=useState(Array(9).fill(null));
+  const[isnextx,setnext]=useState(true);
+  //let nextx=false;
   function handleClick(i){
 
     const nextsquare=squares.slice();
-    nextsquare[i]='X';
+    //the logic to not let change value ones the value is changed to either x or O
+    if (nextsquare[i]){
+      return ;
+    }
+    // the move foris for which  player 
+    //it starts with x 
+    if(isnextx){
+      nextsquare[i]='X';
+    }
+    else{
+      nextsquare[i]='O';
+    }
+
+    setnext(!isnextx);
     setsquare(nextsquare);
   }
   return (
