@@ -1,10 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import './style.css';
+
 function Square(){
+  const [value,setvalue]=useState(null);
+  function handleclick(){
+    setvalue('X')
+  }
   return(
-    <button className="square">
-    
-      X
+    <button className="square" onClick={handleclick} >
+    {value} 
+     
+
     </button>
   )
 }
