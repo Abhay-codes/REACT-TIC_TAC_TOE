@@ -6,14 +6,12 @@ function Winner(square){
   const pattern =[
     [0,1,2],
     [3,4,5],
-    [5,6,7],
+    [6,7,8],
     [0,4,8],
     [0,3,6],
     [1,4,7],
     [2,5,8],
     [2,4,6]
-
-
   ];
   for (let i=0;i<pattern.length;i++){
     const[a,b,c]=pattern[i];
@@ -40,13 +38,14 @@ function Square({val,onSquareClick}){
 function Board () {
   const [squares,setsquare]=useState(Array(9).fill(null));
   const[isnextx,setnext]=useState(true);
+  const[cnt ,setcnt]=useState(0)
   
   //let nextx=false;
   function handleClick(i){
 
     const nextsquare=squares.slice();
     //the logic to not let change value ones the value is changed to either x or O
-    if (Winner(squares) || nextsquare[i]){
+    if (Winner(squares) || nextsquare[i] || cnt>=9){
       return ;
     }
     // the move foris for which  player 
@@ -57,6 +56,7 @@ function Board () {
     else{
       nextsquare[i]='O';
     }
+    setcnt(cnt+1);
 
     setnext(!isnextx);
     setsquare(nextsquare);
@@ -65,6 +65,9 @@ function Board () {
   let status ;
   if (winner){
     status ="winner is:"+winner;
+  }
+  else if(cnt>=9){
+    status ="Game Over "
   }
   else{
     status ="next move is for: " + (isnextx?"x":"O");
